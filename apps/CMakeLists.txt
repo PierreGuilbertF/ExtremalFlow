@@ -10,8 +10,11 @@ find_package(OpenCV REQUIRED)
 # Find Eigen
 find_package(Eigen3 REQUIRED)
 
+# source files
+set(SOURCE_FILES image_filtering.cpp ../src/image_processing_utils.cpp)
+
 # Create executable
-add_executable(VariationalImageFiltering image_filtering.cpp)
+add_executable(VariationalImageFiltering ${SOURCE_FILES})
 
 # Link libraries
 target_link_libraries(VariationalImageFiltering
