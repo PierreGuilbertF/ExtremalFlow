@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
-project(VariationalImageFiltering)
+project(NumericalAnalysis)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 
 # Find OpenCV
 find_package(OpenCV REQUIRED)
@@ -10,21 +12,10 @@ find_package(OpenCV REQUIRED)
 # Find Eigen
 find_package(Eigen3 REQUIRED)
 
-# source files
-set(SOURCE_FILES image_filtering.cpp ../src/image_processing_utils.cpp)
+# Source directory
+set(SRC_DIRECTORY ${CMAKE_SOURCE_DIR}/../src)
 
-# Create executable
-add_executable(VariationalImageFiltering ${SOURCE_FILES})
-
-# Link libraries
-target_link_libraries(VariationalImageFiltering
-    ${OpenCV_LIBS}
-    Eigen3::Eigen
-)
-
-# Include directories
-target_include_directories(VariationalImageFiltering PRIVATE
-    ${OpenCV_INCLUDE_DIRS}
-    ${CMAKE_SOURCE_DIR}/../src
-)
-
+add_subdirectory(image_filtering)
+add_subdirectory(active_contour)
+add_subdirectory(gradient_reconstruction)
+add_subdirectory(differential_geometry)
